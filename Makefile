@@ -2,6 +2,18 @@ NAME = plugin.video.quasar
 GIT = git
 GIT_VERSION = $(shell $(GIT) describe --always)
 VERSION = $(shell sed -ne "s/.*version=\"\([0-9a-z\.\-]*\)\"\sprovider.*/\1/p" addon.xml)
+# ARCHS = \
+# 	android_arm \
+# 	android_x64 \
+# 	android_x86 \
+# 	darwin_x64 \
+# 	linux_arm \
+# 	linux_armv7 \
+# 	linux_arm64 \
+# 	linux_x64 \
+# 	linux_x86 \
+# 	windows_x64 \
+# 	windows_x86
 ARCHS = \
 	android_arm \
 	android_x64 \
@@ -9,7 +21,6 @@ ARCHS = \
 	darwin_x64 \
 	linux_arm \
 	linux_armv7 \
-	linux_arm64 \
 	linux_x64 \
 	linux_x86 \
 	windows_x64 \
@@ -29,7 +40,7 @@ $(ZIP_FILE):
 	git archive --format zip --prefix $(NAME)/ --output $(ZIP_FILE) HEAD
 	mkdir -p $(NAME)/resources/bin
 	for arch in $(ARCHS); do \
-		ln -s `pwd`/resources/bin$(DEV)/$$arch $(NAME)/resources/bin/$$arch; \
+		cp -r `pwd`/$(DEV)/$$arch $(NAME)/resources/bin/$$arch; \
 		zip -9 -r -g $(ZIP_FILE) $(NAME)/resources/bin/$$arch; \
 	done
 	rm -rf $(NAME)
