@@ -1032,3 +1032,7 @@ msgstr ""
 msgctxt "#30322"
 msgid "FAT32"
 msgstr ""
+
+msgctxt "#30323"
+msgid "New search"
+msgstr ""

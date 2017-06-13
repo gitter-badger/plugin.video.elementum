@@ -973,6 +973,7 @@ msgctxt "#30308"
 msgid "Move completed"
 msgstr ""
 
+<<<<<<< HEAD
 msgctxt "#30309"
 msgid "Keep"
 msgstr ""
@@ -1027,4 +1028,8 @@ msgstr ""
 
 msgctxt "#30322"
 msgid "FAT32"
+msgstr ""
+
+msgctxt "#30323"
+msgid "New search"
 msgstr ""
