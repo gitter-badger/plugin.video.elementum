@@ -1,6 +1,8 @@
 NAME = plugin.video.quasar
 GIT = git
 GIT_VERSION = $(shell $(GIT) describe --always)
+GIT_USER = elgatito
+GIT_REPOSITORY = plugin.video.quasar
 VERSION = $(shell sed -ne "s/.*version=\"\([0-9a-z\.\-]*\)\"\sprovider.*/\1/p" addon.xml)
 # ARCHS = \
 # 	android_arm \
@@ -51,6 +53,32 @@ zipfiles: addon.xml
 	for arch in $(ARCHS); do \
 		$(MAKE) $$arch; \
 	done
+
+upload:
+	github-release release \
+		--user $(GIT_USER) \
+		--repo $(GIT_REPOSITORY) \
+		--tag v$(VERSION) \
+		--name "$(VERSION)" \
+		--description "$(VERSION)"
+
+	for arch in $(ARCHS); do \
+		github-release upload \
+			--user $(GIT_USER) \
+			--repo $(GIT_REPOSITORY) \
+			--replace \
+			--tag v$(VERSION) \
+			--file $(NAME)-$(VERSION).$$arch.zip \
+			--name $(NAME)-$(VERSION).$$arch.zip; \
+	done
+
+	github-release upload \
+		--user $(GIT_USER) \
+		--repo $(GIT_REPOSITORY) \
+		--replace \
+		--tag v$(VERSION) \
+		--file $(NAME)-$(VERSION).zip \
+		--name $(NAME)-$(VERSION).zip
 
 clean_arch:
 	 rm -f $(ZIP_FILE)

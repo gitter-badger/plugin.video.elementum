@@ -1033,3 +1033,7 @@ msgstr ""
 msgctxt "#30323"
 msgid "New search"
 msgstr ""
+
+msgctxt "#30324"
+msgid "Force stream selection from settings"
+msgstr ""
